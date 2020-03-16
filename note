@@ -1,0 +1,239 @@
+#JavaScript note
+
+var: 
+    If you use var outside of a function, it belongs to the global scope.
+    If you use var inside of a function, it belongs to that function.
+    If you use var inside of a block, i.e. a for loop, the variable is still available outside of that block.
+    var has a function scope, not a block scope.
+
+let: 
+    has block scope
+    let is the block scoped version of var, and is limited to the block (or expression) where it is defined.
+    If you use let inside of a block, i.e. a for loop, the variable is only available inside of that loop.
+
+
+const: 
+    has a variable that once it has been created, its value can never change.
+    const has a block scope.
+
+JSX: 
+    stands for JavaScript XML.
+    allows us to write HTML in React.
+    makes it easier to write and add HTML in React.
+    allows us to write HTML elements in JavaScript and place them in the DOM without any createElement()  and/or appendChild() methods.
+    converts HTML tags into react elements.
+===================================================================
+Example 1
+JSX:
+
+const myelement = <h1>I Love JSX!</h1>;
+
+ReactDOM.render(myelement, document.getElementById('root'));
+====================================================================
+
+====================================================================
+Example 2
+Without JSX:
+
+const myelement = React.createElement('h1', {}, 'I do not use JSX!');
+
+ReactDOM.render(myelement, document.getElementById('root'));
+=====================================================================
+
+React Props
+    are like function arguments in JavaScript and attributes in HTML.
+    Props are also how you pass data from one component to another, as parameters
+    To send props into a component, use the same syntax as HTML attributes:
+
+    Example
+        Add a "brand" attribute to the Car element:
+
+            const myelement = <Car brand="Ford" />;
+
+The component receives the argument as a props object:
+--------------------------------------------------------------------------
+Example
+Use the brand attribute in the component:
+
+class Car extends React.Component {
+  render() {
+    return <h2>I am a {this.props.brand}!</h1>;
+  }
+}
+
+--------------------------------------------------------------------------
+
+
+React State
+    React components has a built-in state object.
+    The state object is where you store property values that belongs to the component.
+    When the state object changes, the component re-renders.
+    The state object can contain as many properties as you like:
+
+Example:
+Specify all the properties your component need:
+
+class Car extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      brand: "Ford",
+      model: "Mustang",
+      color: "red",
+      year: 1964
+    };
+  }
+  render() {
+    return (
+      <div>
+        <h1>My {this.state.brand}</h1>
+        <p>
+          It is a {this.state.color}
+          {this.state.model}
+          from {this.state.year}.
+        </p>
+      </div>
+    );
+  }
+}
+
+
+output:
+    My Ford
+    It is a red Mustang from 1964.
+
+
+-----------------------------------------------------------------------------
+
+Changing the state Object
+To change a value in the state object, use the this.setState() method.
+
+When a value in the state object changes, the component will re-render, meaning that the output will change according to the new value(s).
+
+Example:
+Add a button with an onClick event that will change the color property:
+
+class Car extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      brand: "Ford",
+      model: "Mustang",
+      color: "red",
+      year: 1964
+    };
+  }
+  changeColor = () => {
+    this.setState({color: "blue"});
+  }
+  render() {
+    return (
+      <div>
+        <h1>My {this.state.brand}</h1>
+        <p>
+          It is a {this.state.color}
+          {this.state.model}
+          from {this.state.year}.
+        </p>
+        <button
+          type="button"
+          onClick={this.changeColor}
+        >Change color</button>
+      </div>
+    );
+  }
+}
+
+
+=========================================================================
+
+Lifecycle of Components
+    Each component in React has a lifecycle which you can monitor and manipulate during its three main phases.
+    The three phases are: Mounting, Updating, and Unmounting.
+
+
+    Mounting:
+        Mounting means putting elements into the DOM.
+        React has four built-in methods that gets called, in this order, when mounting a component:
+            1. constructor()
+            2. getDerivedStateFromProps()
+            3. render()
+            4. componentDidMount()
+
+The render() method is required and will always be called, the others are optional and will be called if you define them.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+constructor
+The constructor() method is called before anything else, when the component is initiated, and it is the natural place to set up the initial state and other initial values.
+
+The constructor() method is called with the props, as arguments, and you should always start by calling the super(props) before anything else, this will initiate the parent's constructor method and allows the component to inherit methods from its parent (React.Component).
+
+Example:
+The constructor method is called, by React, every time you make a component:
+
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {favoritecolor: "red"};
+  }
+  render() {
+    return (
+      <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+    );
+  }
+}
+
+ReactDOM.render(<Header />, document.getElementById('root'));
+
+output:
+    My Favorite Color is red.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+getDerivedStateFromProps
+The getDerivedStateFromProps() method is called right before rendering the element(s) in the DOM.
+
+This is the natural place to set the state object based on the initial props.
+
+It takes state as an argument, and returns an object with changes to the state.
+
+The example below starts with the favorite color being "red", but the getDerivedStateFromProps() method updates the favorite 
+color based on the favcol attribute:
+
+Example:
+The getDerivedStateFromProps method is called right before the render method:
+
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {favoritecolor: "red"};
+  }
+  static getDerivedStateFromProps(props, state) {
+    return {favoritecolor: props.favcol };
+  }
+  render() {
+    return (
+      <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+    );
+  }
+}
+
+ReactDOM.render(<Header favcol="yellow"/>, document.getElementById('root'));
+
+output:
+My Favorite Color is yellow.
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+    Updating:
+    Unmounting:
+
+
+
+
+
+
+
+
+
