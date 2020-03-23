@@ -5,7 +5,7 @@ import './App.css';
 
 const App = () => {
     const APP_ID = '07c563f5';
-    const APP_KEY = '62ed51fc6e9de01f07f0e9f7610fef16';
+    const APP_KEY = '8cf3fa04dfb67658bc264d9e09d4b600';
    
 
     const [recipes, setRecipes] = useState([]);
@@ -42,7 +42,7 @@ const App = () => {
                 <button className="search-button" type="submit">Search</button>
 
             </form>
-            <div className="recipes">
+            <div className="recipes" key={recipe.id}>
             {recipes.map(recipe => (
                 <Recipe 
                 key = {recipe.recipe.label}
@@ -51,6 +51,7 @@ const App = () => {
                 calories={recipe.recipe.calories}
                 image={recipe.recipe.image}
                 source={recipe.recipe.source}
+                uri={recipe.recipe.uri}
                 />
             ))}
             </div>

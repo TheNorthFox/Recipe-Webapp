@@ -1,20 +1,27 @@
 import React from 'react';
-import './recipe.css';
 
-const Recipe = ({title,calories,image,ingredients,source}) => {
+const Recipe = ({title,calories,image,ingredients,source,uri}) => {
     return (
-        <div className='recipe'>
-            <h1 className='title'>{title}</h1>
-            <ol>
-                {ingredients.map(ingredient =>(
+     
+<div style={{display: 'flex', flexDirection: 'row'}}>
+<div class="card"  style={{flex: 1}}>
+  <h5 class="card-header">{title}</h5>
+  <div class="card-body">
+    <img class="img-fluid rounded" src={image} alt=""/>
+    <p class="card-text">
+    {ingredients.map(ingredient =>(
                     <li>{ingredient.text}</li>
                 ))}
-            </ol>
-            <p>Calories = {calories}</p>
-            <img className="image" src={image} alt=""/>
-            <p>Source:{source}</p>
-            
-        </div>
+    </p>
+    <div class="card-footer">
+    <p>Calories = {calories}</p>
+    <p>Source: {source}</p>
+    <a href={uri} class="btn btn-success">Go Link</a>
+    </div>
+    
+  </div>
+</div>
+</div>
     );
 }
 

@@ -1,53 +1,45 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useState, useEffect } from "react";
-import "./Header.css";
-import { CSSTransition } from "react-transition-group";
 
-export default function Header() {
-  const [isNavVisible, setNavVisibility] = useState(false);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 700px)");
-    mediaQuery.addListener(handleMediaQueryChange);
-    handleMediaQueryChange(mediaQuery);
-
-    return () => {
-      mediaQuery.removeListener(handleMediaQueryChange);
-    };
-  }, []);
-
-  const handleMediaQueryChange = mediaQuery => {
-    if (mediaQuery.matches) {
-      setIsSmallScreen(true);
-    } else {
-      setIsSmallScreen(false);
-    }
-  };
-
-  const toggleNav = () => {
-    setNavVisibility(!isNavVisible);
-  };
+const Header = () =>{
 
   return (
-    <header className="Header">
-      <img src={require("./logo192.png")} className="Logo" alt="logo" />
-      <CSSTransition
-        in={!isSmallScreen || isNavVisible}
-        timeout={350}
-        classNames="NavAnimation"
-        unmountOnExit
-      >
-        <nav className="Nav">
-          <a href="/">Home</a>
-          <a href="/">Articles</a>
-          <a href="/">About</a>
-          <button>Logout</button>
-        </nav>
-      </CSSTransition>
-      <button onClick={toggleNav} className="Burger">
-        🍔
-      </button>
-    </header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Special Recipe</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Menu</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          CookBooks
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+    </ul>
+    <div class="btn-group" role="group">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Register</button>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+    </div>
+  </div>
+</nav>
   );
 }
+
+export default Header;
