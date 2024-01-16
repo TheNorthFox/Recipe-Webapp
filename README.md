@@ -2,9 +2,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 https://api.edamam.com/
 
-<img src="/im1.png" width="128"/>
-<img src="/im2.png" width="128"/>
-<img src="./im3.png" width="128"/>
+<p>
+  <img src="src/assets/im1.png" width="350">
+</p>
+<p>
+  <img src="src/assets/im2.png" width="350">
+</p>
+<p>
+  <img src="src/assets/im3.png" width="350">
+</p>
 
 ## Available Scripts
 
